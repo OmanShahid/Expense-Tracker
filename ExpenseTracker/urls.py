@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from django.http import HttpResponse
+
+
+
+from tracker import views
+
+def favicon(request):
+    return HttpResponse(status=204)  # No Content response
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('delete/<int:expense_id>/', views.delete_expense, name='delete_expense'),
+    path('favicon.ico', favicon, name='favicon'),
 ]
